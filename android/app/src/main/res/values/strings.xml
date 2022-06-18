@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="app_name">practice_news_app</string>
+    <string name="facebook_app_id">553398683042209</string>
+    <string name="fb_login_protocol_scheme">fb553398683042209</string>
+    <string name="facebook_client_token">b7bf763489be310ec681912ace46af30</string>
+</resources>
