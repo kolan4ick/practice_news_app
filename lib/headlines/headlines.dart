@@ -1,0 +1,1 @@
+import 'view/headlines_page.dart';

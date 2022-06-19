@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
-import '../models/user.dart';
+import '../models/user_model.dart';
 import 'cache/cache.dart';
 
 /// {@template sign_up_with_email_and_password_failure}

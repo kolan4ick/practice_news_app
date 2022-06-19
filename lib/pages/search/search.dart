@@ -1,0 +1,1 @@
+import 'view/search_page.dart';

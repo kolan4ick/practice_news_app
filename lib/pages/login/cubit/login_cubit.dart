@@ -2,9 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 
-import '../../utils/validator/email.dart';
-import '../../utils/validator/password.dart';
-import '../../repositories/authentication_repository.dart';
+import '../../../repositories/authentication_repository.dart';
+import '../../../utils/validator/email.dart';
+import '../../../utils/validator/password.dart';
+
 
 part 'login_state.dart';
 
