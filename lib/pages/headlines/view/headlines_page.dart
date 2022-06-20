@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:practice_news_app/models/article_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../repositories/api_repository.dart';
 import '../../../widgets/article_item.dart';
