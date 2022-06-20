@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:practice_news_app/headlines/view/headlines_page.dart';
 import 'package:practice_news_app/pages/login/login.dart';
+import 'package:practice_news_app/repositories/api_repository.dart';
+import '../../headlines/view/headlines_page.dart';
 import '../../profile/view/profile_page.dart';
 import '../../search/view/search_page.dart';
 import '/app/app.dart';
@@ -18,7 +19,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   final _pages = [
-    HeadlinesPage(),
+    HeadlinesPage(
+      apiRepository: ApiRepository(),
+    ),
     SearchPage(),
     ProfilePage(),
   ];
