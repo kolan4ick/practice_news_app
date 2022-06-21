@@ -9,10 +9,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/article_model.dart';
 import '../models/user_model.dart';
 
-class ArticleItem extends StatelessWidget {
+class ArticleSavedItem extends StatelessWidget {
   final ArticleModel articleModel;
 
-  ArticleItem({required this.articleModel});
+  ArticleSavedItem({required this.articleModel});
 
   _launchURLBrowser(String link) async {
     var url = Uri.parse(link);
@@ -56,36 +56,15 @@ class ArticleItem extends StatelessWidget {
                         ElevatedButton.icon(
                           onPressed: () {
                             Navigator.pop(context);
-                            if (userModel.isEmpty)
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            else {
-                              ArticleRepository articleRepository =
-                                  ArticleRepository();
-                              articleRepository
-                                  .saveArticle(articleModel, userModel)
-                                  .then((value) {
-                                if (value) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Збережено'),
-                                    ),
-                                  );
-                                }else{
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Сталась помилка'),
-                                    ),
-                                  );
-                                }
-                              });
-                            }
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Видалено'),
+                              ),
+                            );
+                            ArticleRepository().deleteArticle(articleModel);
                           },
-                          icon: Icon(Icons.save),
-                          label: Text("Зберегти"),
+                          icon: Icon(Icons.delete),
+                          label: Text("Видалити"),
                         ),
                       ],
                     ),

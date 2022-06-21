@@ -1,6 +1,7 @@
 import 'package:practice_news_app/models/source_model.dart';
 
 class ArticleModel {
+  String? id;
   String? author;
   String? title;
   String? description;
@@ -10,7 +11,8 @@ class ArticleModel {
   String? content;
 
   ArticleModel(
-      {required this.author,
+      {required this.id,
+      required this.author,
       required this.title,
       required this.description,
       required this.url,
@@ -18,8 +20,9 @@ class ArticleModel {
       required this.publishedAt,
       required this.content});
 
-  factory ArticleModel.fromJson(Map<String, dynamic> json) {
+  factory ArticleModel.fromJson(Map<String, dynamic> json, {String? id}) {
     return ArticleModel(
+      id: id,
       author: json['author'] as String?,
       title: json['title'] as String?,
       description: json['description'] as String?,
