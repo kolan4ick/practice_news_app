@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_news_app/app/app.dart';
 import 'package:practice_news_app/pages/login/login.dart';
+import 'package:practice_news_app/repositories/article_repository.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ArticleItem extends StatelessWidget {
-  final String title;
-  final String url;
-  final String? imageUrl;
+import '../models/article_model.dart';
+import '../models/user_model.dart';
 
-  ArticleItem(this.title, this.url, this.imageUrl);
+class ArticleItem extends StatelessWidget {
+  final ArticleModel articleModel;
+
+  ArticleItem({required this.articleModel});
 
   _launchURLBrowser(String link) async {
     var url = Uri.parse(link);
@@ -23,7 +25,7 @@ class ArticleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppStatus appStatus = context.select((AppBloc bloc) => bloc.state.status);
+    UserModel userModel = context.select((AppBloc bloc) => bloc.state.user);
     return Container(
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -46,26 +48,39 @@ class ArticleItem extends StatelessWidget {
                       children: [
                         ElevatedButton.icon(
                           onPressed: () {
-                            Share.share(url);
+                            Share.share(articleModel.url ?? '');
                           },
                           icon: Icon(Icons.share),
                           label: Text("Переслати"),
                         ),
                         ElevatedButton.icon(
                           onPressed: () {
-                            if (appStatus == AppStatus.unauthenticated)
+                            if (userModel.isEmpty)
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()),
                               );
                             else {
-                              //  TODO saving to database if user signed in
-
+                              ArticleRepository articleRepository =
+                                  ArticleRepository();
+                              articleRepository
+                                  .saveArticle(articleModel, userModel)
+                                  .then((value) {
+                                if (value) {
+                                  // close the alert dialog
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('Збережено'),
+                                    ),
+                                  );
+                                }
+                              });
                             }
                           },
-                          icon: Icon(Icons.share),
-                          label: Text("Переслати"),
+                          icon: Icon(Icons.save),
+                          label: Text("Зберегти"),
                         ),
                       ],
                     ),
@@ -85,17 +100,17 @@ class ArticleItem extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             child: InkWell(
               onTap: () {
-                _launchURLBrowser(url);
+                _launchURLBrowser(articleModel.url ?? '');
               },
               child: Column(
                 children: [
-                  if (imageUrl != null)
+                  if (articleModel.urlToImage != null)
                     Image.network(
-                      '$imageUrl',
+                      '${articleModel.urlToImage}',
                       fit: BoxFit.fill,
                     ),
                   Text(
-                    title,
+                    articleModel.title ?? '',
                     style: const TextStyle(
                         color: Colors.purple,
                         fontSize: 20,

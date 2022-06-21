@@ -66,8 +66,7 @@ class _HeadlinesPageState extends State<HeadlinesPage> {
           builderDelegate: PagedChildBuilderDelegate<ArticleModel>(
             itemBuilder: (context, item, index) => Padding(
               padding: const EdgeInsets.all(15.0),
-              child: ArticleItem(
-                  item.title.toString(), item.url.toString(), item.urlToImage),
+              child: ArticleItem(articleModel: item),
             ),
           ),
         ),
