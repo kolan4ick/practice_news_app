@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../models/article_model.dart';
 import '../models/user_model.dart';
+import '../pages/profile/bloc/profile_bloc.dart';
 
 class ArticleSavedItem extends StatefulWidget {
   final ArticleModel articleModel;
@@ -72,7 +73,7 @@ class _ArticleSavedItemState extends State<ArticleSavedItem> {
                                 content: Text('Видалено'),
                               ),
                             );
-                            ArticleRepository().deleteArticle(_articleModel);
+                            context.read<ProfileBloc>().add(ProfileArticleDeleteRequested(this._articleModel));
                           },
                           icon: Icon(Icons.delete),
                           label: Text("Видалити"),
@@ -110,7 +111,7 @@ class _ArticleSavedItemState extends State<ArticleSavedItem> {
                   Text(
                     _articleModel.title ?? '',
                     style: const TextStyle(
-                        color: Colors.white24,
+                        color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
