@@ -50,9 +50,9 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: 'email',
+            labelText: 'емейл',
             helperText: '',
-            errorText: state.email.invalid ? 'invalid email' : null,
+            errorText: state.email.invalid ? 'некоректний емейл' : null,
           ),
         );
       },
@@ -72,9 +72,9 @@ class _PasswordInput extends StatelessWidget {
               context.read<SignUpCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
+            labelText: 'пароль',
             helperText: '',
-            errorText: state.password.invalid ? 'invalid password' : null,
+            errorText: state.password.invalid ? 'неправильний пароль' : null,
           ),
         );
       },
@@ -97,10 +97,10 @@ class _ConfirmPasswordInput extends StatelessWidget {
               .confirmedPasswordChanged(confirmPassword),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'confirm password',
+            labelText: 'підтвердження паролю',
             helperText: '',
             errorText: state.confirmedPassword.invalid
-                ? 'passwords do not match'
+                ? 'паролі не співпадають'
                 : null,
           ),
         );
@@ -128,7 +128,7 @@ class _SignUpButton extends StatelessWidget {
                 onPressed: state.status.isValidated
                     ? () => context.read<SignUpCubit>().signUpFormSubmitted()
                     : null,
-                child: const Text('SIGN UP'),
+                child: const Text('ЗАРЕЄСТРУВАТИСЬ'),
               );
       },
     );

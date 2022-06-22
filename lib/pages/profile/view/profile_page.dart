@@ -4,6 +4,7 @@ import 'package:practice_news_app/models/user_model.dart';
 import 'package:practice_news_app/pages/profile/bloc/profile_bloc.dart';
 import 'package:practice_news_app/repositories/article_repository.dart';
 import 'package:practice_news_app/widgets/article_item.dart';
+import 'package:practice_news_app/widgets/avatar.dart';
 
 import '../../../app/bloc/app_bloc.dart';
 import '../../../widgets/article_saved_item.dart';
@@ -37,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
     UserModel userModel = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Заголовки"),
+        title: const Text("Профіль"),
         backgroundColor: Color.fromARGB(255, 143, 218, 212),
       ),
       body: SingleChildScrollView(
@@ -45,8 +46,14 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              Center(child: Text('Ваш профіль')),
-              Center(child: Text('Імя: ${userModel.name}')),
+              //avatar
+              Avatar(
+                photo: userModel.photo,
+              ),
+              Center(
+                  child: Text('${userModel.name}',
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold))),
               BlocBuilder<ProfileBloc, ProfileState>(
                   builder: (_, ProfileState state) {
                 _articles = <ArticleSavedItem>[];

@@ -19,7 +19,7 @@ class LoginForm extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text(state.errorMessage ?? 'Authentication Failure'),
+                content: Text(state.errorMessage ?? 'Помилка аутентифікації'),
               ),
             );
         }
@@ -65,9 +65,9 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: 'email',
+            labelText: 'емейл',
             helperText: '',
-            errorText: state.email.invalid ? 'invalid email' : null,
+            errorText: state.email.invalid ? 'некоректний емейл' : null,
           ),
         );
       },
@@ -87,9 +87,9 @@ class _PasswordInput extends StatelessWidget {
               context.read<LoginCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
+            labelText: 'пароль',
             helperText: '',
-            errorText: state.password.invalid ? 'invalid password' : null,
+            errorText: state.password.invalid ? 'некоректний пароль' : null,
           ),
         );
       },
@@ -116,7 +116,7 @@ class _LoginButton extends StatelessWidget {
                 onPressed: state.status.isValidated
                     ? () => context.read<LoginCubit>().logInWithCredentials()
                     : null,
-                child: const Text('LOGIN'),
+                child: const Text('ВХІД'),
               );
       },
     );
@@ -130,7 +130,7 @@ class _GoogleLoginButton extends StatelessWidget {
     return ElevatedButton.icon(
       key: const Key('loginForm_googleLogin_raisedButton'),
       label: const Text(
-        'SIGN IN WITH GOOGLE',
+        'УВІЙТИ ЧЕРЕЗ GOOGLE',
         style: TextStyle(color: Colors.white),
       ),
       style: ElevatedButton.styleFrom(
@@ -153,7 +153,7 @@ class _SignUpButton extends StatelessWidget {
       key: const Key('loginForm_createAccount_flatButton'),
       onPressed: () => Navigator.of(context).push<void>(SignUpPage.route()),
       child: Text(
-        'CREATE ACCOUNT',
+        'СТВОРИТИ АКАУНТ',
         style: TextStyle(color: theme.primaryColor),
       ),
     );
@@ -168,7 +168,7 @@ class _FacebookLoginButton extends StatelessWidget {
     return ElevatedButton.icon(
       key: const Key('loginForm_facebookLogin_raisedButton'),
       label: const Text(
-        'SIGN IN WITH FACEBOOK',
+        'УВІЙТИ ЧЕРЕЗ FACEBOOK',
         style: TextStyle(color: Colors.white),
       ),
       style: ElevatedButton.styleFrom(

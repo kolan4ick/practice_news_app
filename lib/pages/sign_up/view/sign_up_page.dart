@@ -14,7 +14,7 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title: const Text('Реєстрація'),
         backgroundColor: Color.fromARGB(255, 143, 218, 212),
       ),
       body: Padding(
