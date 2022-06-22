@@ -63,6 +63,7 @@ class _ArticleSavedItemState extends State<ArticleSavedItem> {
                             Share.share(_articleModel.url ?? '');
                           },
                           icon: Icon(Icons.share),
+                          style: ElevatedButton.styleFrom(primary: Colors.blue),
                           label: Text("Переслати"),
                         ),
                         ElevatedButton.icon(
@@ -73,10 +74,13 @@ class _ArticleSavedItemState extends State<ArticleSavedItem> {
                                 content: Text('Видалено'),
                               ),
                             );
-                            context.read<ProfileBloc>().add(ProfileArticleDeleteRequested(this._articleModel));
+                            context.read<ProfileBloc>().add(
+                                ProfileArticleDeleteRequested(
+                                    this._articleModel));
                           },
                           icon: Icon(Icons.delete),
                           label: Text("Видалити"),
+                          style: ElevatedButton.styleFrom(primary: Colors.red),
                         ),
                       ],
                     ),
@@ -84,6 +88,7 @@ class _ArticleSavedItemState extends State<ArticleSavedItem> {
                       TextButton(
                         child: Text('Відміна'),
                         onPressed: () => Navigator.pop(context),
+                        style: TextButton.styleFrom(primary: Colors.red),
                       ),
                     ],
                   ),
