@@ -29,7 +29,7 @@ class ArticleItem extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: Colors.amber),
+          color: Color.fromARGB(255, 95, 202, 193)),
       child: Column(
         children: [
           Align(
@@ -47,6 +47,7 @@ class ArticleItem extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(primary: Colors.blue),
                           onPressed: () {
                             Share.share(articleModel.url ?? '');
                           },
@@ -54,6 +55,8 @@ class ArticleItem extends StatelessWidget {
                           label: Text("Переслати"),
                         ),
                         ElevatedButton.icon(
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.green),
                           onPressed: () {
                             Navigator.pop(context);
                             if (userModel.isEmpty)
@@ -74,7 +77,7 @@ class ArticleItem extends StatelessWidget {
                                       content: Text('Збережено'),
                                     ),
                                   );
-                                }else{
+                                } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text('Сталась помилка'),
@@ -92,13 +95,19 @@ class ArticleItem extends StatelessWidget {
                     actions: [
                       TextButton(
                         child: Text('Відміна'),
+                        style: TextButton.styleFrom(
+                          primary: Colors.red,
+                        ),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ],
                   ),
                 );
               },
-              icon: Icon(Icons.more_vert),
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.white,
+              ),
             ),
           ),
           Padding(
@@ -117,7 +126,7 @@ class ArticleItem extends StatelessWidget {
                   Text(
                     articleModel.title ?? '',
                     style: const TextStyle(
-                        color: Colors.purple,
+                        color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),

@@ -9,10 +9,21 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/article_model.dart';
 import '../models/user_model.dart';
 
-class ArticleSavedItem extends StatelessWidget {
+class ArticleSavedItem extends StatefulWidget {
   final ArticleModel articleModel;
 
   ArticleSavedItem({required this.articleModel});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _ArticleSavedItemState(articleModel);
+  }
+}
+
+class _ArticleSavedItemState extends State<ArticleSavedItem> {
+  final _articleModel;
+
+  _ArticleSavedItemState(this._articleModel);
 
   _launchURLBrowser(String link) async {
     var url = Uri.parse(link);
@@ -29,7 +40,7 @@ class ArticleSavedItem extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: Colors.amber),
+          color: Color.fromARGB(255, 95, 202, 193)),
       child: Column(
         children: [
           Align(
@@ -48,7 +59,7 @@ class ArticleSavedItem extends StatelessWidget {
                       children: [
                         ElevatedButton.icon(
                           onPressed: () {
-                            Share.share(articleModel.url ?? '');
+                            Share.share(_articleModel.url ?? '');
                           },
                           icon: Icon(Icons.share),
                           label: Text("Переслати"),
@@ -61,7 +72,7 @@ class ArticleSavedItem extends StatelessWidget {
                                 content: Text('Видалено'),
                               ),
                             );
-                            ArticleRepository().deleteArticle(articleModel);
+                            ArticleRepository().deleteArticle(_articleModel);
                           },
                           icon: Icon(Icons.delete),
                           label: Text("Видалити"),
@@ -77,26 +88,29 @@ class ArticleSavedItem extends StatelessWidget {
                   ),
                 );
               },
-              icon: Icon(Icons.more_vert),
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.white,
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             child: InkWell(
               onTap: () {
-                _launchURLBrowser(articleModel.url ?? '');
+                _launchURLBrowser(_articleModel.url ?? '');
               },
               child: Column(
                 children: [
-                  if (articleModel.urlToImage != null)
+                  if (_articleModel.urlToImage != null)
                     Image.network(
-                      '${articleModel.urlToImage}',
+                      '${_articleModel.urlToImage}',
                       fit: BoxFit.fill,
                     ),
                   Text(
-                    articleModel.title ?? '',
+                    _articleModel.title ?? '',
                     style: const TextStyle(
-                        color: Colors.purple,
+                        color: Colors.white24,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),

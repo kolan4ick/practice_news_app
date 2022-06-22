@@ -58,6 +58,7 @@ class _HeadlinesPageState extends State<HeadlinesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Заголовки"),
+        backgroundColor: Color.fromARGB(255, 143, 218, 212),
       ),
       body: RefreshIndicator(
         onRefresh: () => Future.sync(() => _pagingController.refresh()),

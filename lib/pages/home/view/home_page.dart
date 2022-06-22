@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Color.fromARGB(255, 95, 202, 193),
         onTap: (index) => setState(() {
           if (index == 2 && user.isEmpty) {
             Navigator.push(

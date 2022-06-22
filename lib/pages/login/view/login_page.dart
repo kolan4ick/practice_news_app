@@ -12,7 +12,10 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(
+        title: const Text('Login'),
+        backgroundColor: Color.fromARGB(255, 143, 218, 212),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: BlocProvider(
