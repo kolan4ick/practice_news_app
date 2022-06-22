@@ -8,7 +8,7 @@ class ApiRepository {
   Future<List<ArticleModel>> getArticles(int page, int perPage,
       {String passphrase = ''}) async {
     final _endPointUrl =
-        "https://newsapi.org/v2/top-headlines?country=ua&apiKey=7637fe4ed925460ab03d1eee1c0f7aff&page=$page&pageSize=$perPage";
+        "https://newsapi.org/v2/top-headlines?country=ua&apiKey=7637fe4ed925460ab03d1eee1c0f7aff&q=$passphrase&page=$page&pageSize=$perPage";
     Response res = await get(Uri.parse(_endPointUrl));
 
     if (res.statusCode == 200) {

@@ -49,7 +49,7 @@ class ArticleRepository {
         .toList();
   }
 
-  void deleteArticle(ArticleModel articleModel) {
+  Future<void> deleteArticle(ArticleModel articleModel) async {
     // delete article from firebase firestore database
     final db = FirebaseFirestore.instance;
     final articleRef = db.collection('articles');
