@@ -56,13 +56,26 @@ class _ProfilePageState extends State<ProfilePage> {
                       .add(ProfileArticleOnLoadRequested());
                   return CircularProgressIndicator();
                 } else if (state.status == ProfileStatus.loaded) {
-                  return ListView.builder(
-                    scrollDirection: Axis.vertical,
+                  return Column(children: [
+                    ...state.list.map((element) {
+                      return (Column(children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ArticleSavedItem(articleModel: element),
+                      ]));
+                    })
+                  ]);
+                  /*return ListView.builder(
                     shrinkWrap: true,
                     itemCount: state.list.length,
-                    itemBuilder: (_, index) =>
-                        ArticleSavedItem(articleModel: state.list[index]),
-                  );
+                    itemBuilder: (_, index) => (Column(children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ArticleSavedItem(articleModel: state.list[index]),
+                    ])),
+                  );*/
                 } else
                   return Text("error");
               })

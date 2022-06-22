@@ -9,7 +9,7 @@ import 'package:practice_news_app/repositories/authentication_repository.dart';
 class ArticleRepository {
   ArticleRepository();
 
-  Future<bool> saveArticle(
+  Future<String?> saveArticle(
       ArticleModel articleModel, UserModel userModel) async {
     // save article to firebase firestore database
     final db = FirebaseFirestore.instance;
@@ -25,13 +25,13 @@ class ArticleRepository {
       'content': articleModel.content,
     };
     try {
-      db.collection("articles").add(article).then((DocumentReference doc) =>
-          print('DocumentSnapshot added with ID: ${doc.id}'));
+      return db
+          .collection("articles")
+          .add(article)
+          .then((DocumentReference doc) => doc.id);
     } catch (e) {
-      print(e);
-      return false;
+      return null;
     }
-    return true;
   }
 
   /* Get articles from firebase database for current logged in user */

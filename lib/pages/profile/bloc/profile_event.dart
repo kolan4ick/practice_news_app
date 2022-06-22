@@ -14,7 +14,11 @@ class ProfileArticleDeleteRequested extends ProfileEvent {
   const ProfileArticleDeleteRequested(this.article);
 }
 
-class ProfileArticleOnLoadRequested extends ProfileEvent {
+class ProfileArticleOnLoadRequested extends ProfileEvent {}
 
+class ProfileArticleOnSaveRequested extends ProfileEvent {
+  final ArticleModel article;
+  final UserModel user;
 
+  const ProfileArticleOnSaveRequested(this.article, this.user);
 }

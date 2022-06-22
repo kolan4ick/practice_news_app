@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../models/article_model.dart';
 import '../models/user_model.dart';
+import '../pages/profile/bloc/profile_bloc.dart';
 
 class ArticleItem extends StatelessWidget {
   final ArticleModel articleModel;
@@ -68,23 +69,9 @@ class ArticleItem extends StatelessWidget {
                             else {
                               ArticleRepository articleRepository =
                                   ArticleRepository();
-                              articleRepository
-                                  .saveArticle(articleModel, userModel)
-                                  .then((value) {
-                                if (value) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Збережено'),
-                                    ),
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Сталась помилка'),
-                                    ),
-                                  );
-                                }
-                              });
+                              context.read<ProfileBloc>().add(
+                                  ProfileArticleOnSaveRequested(
+                                      articleModel, userModel));
                             }
                           },
                           icon: Icon(Icons.save),
