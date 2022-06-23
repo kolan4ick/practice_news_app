@@ -46,6 +46,10 @@ class _EmailInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return TextField(
+          style: TextStyle(
+            fontSize: 16,
+            color: Theme.of(context).textTheme.headline1?.color,
+          ),
           key: const Key('signUpForm_emailInput_textField'),
           onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
@@ -67,6 +71,10 @@ class _PasswordInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return TextField(
+          style: TextStyle(
+            fontSize: 16,
+            color: Theme.of(context).textTheme.headline1?.color,
+          ),
           key: const Key('signUpForm_passwordInput_textField'),
           onChanged: (password) =>
               context.read<SignUpCubit>().passwordChanged(password),
@@ -91,6 +99,10 @@ class _ConfirmPasswordInput extends StatelessWidget {
           previous.confirmedPassword != current.confirmedPassword,
       builder: (context, state) {
         return TextField(
+          style: TextStyle(
+            fontSize: 16,
+            color: Theme.of(context).textTheme.headline1?.color,
+          ),
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
           onChanged: (confirmPassword) => context
               .read<SignUpCubit>()

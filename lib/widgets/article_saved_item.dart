@@ -39,9 +39,9 @@ class _ArticleSavedItemState extends State<ArticleSavedItem> {
   Widget build(BuildContext context) {
     UserModel userModel = context.select((AppBloc bloc) => bloc.state.user);
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: Color.fromARGB(255, 95, 202, 193)),
+          color: Theme.of(context).primaryColor),
       child: Column(
         children: [
           Align(

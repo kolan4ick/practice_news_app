@@ -2,31 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_news_app/models/user_model.dart';
 import 'package:practice_news_app/pages/profile/bloc/profile_bloc.dart';
+import 'package:practice_news_app/providers/theme_provider.dart';
 import 'package:practice_news_app/repositories/article_repository.dart';
 import 'package:practice_news_app/widgets/article_item.dart';
 import 'package:practice_news_app/widgets/avatar.dart';
 
 import '../../../app/bloc/app_bloc.dart';
 import '../../../widgets/article_saved_item.dart';
+import '../../../widgets/change_theme_button.dart';
 
 class ProfilePage extends StatefulWidget {
-  final ArticleRepository _articleRepository;
-
   ProfilePage({Key? key, required ArticleRepository articleRepository})
-      : _articleRepository = articleRepository,
-        super(key: key);
+      : super(key: key);
 
   @override
   _ProfilePageState createState() {
-    return _ProfilePageState(_articleRepository);
+    return _ProfilePageState();
   }
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final _articleRepository;
-  var _articles = [];
-
-  _ProfilePageState(this._articleRepository) {}
+  _ProfilePageState() {}
 
   @override
   void initState() {
@@ -38,8 +34,11 @@ class _ProfilePageState extends State<ProfilePage> {
     UserModel userModel = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          ChangeThemeButtonWidget(),
+        ],
         title: const Text("Профіль"),
-        backgroundColor: Color.fromARGB(255, 143, 218, 212),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -56,7 +55,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 20, fontWeight: FontWeight.bold))),
               BlocBuilder<ProfileBloc, ProfileState>(
                   builder: (_, ProfileState state) {
-                _articles = <ArticleSavedItem>[];
                 if (state.status == ProfileStatus.unloaded) {
                   context
                       .read<ProfileBloc>()
@@ -92,6 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 5,
+        backgroundColor: Theme.of(context).primaryColorLight,
         onPressed: () {
           context.read<AppBloc>().add(AppLogoutRequested());
           Navigator.pop(context);

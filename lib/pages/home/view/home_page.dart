@@ -31,12 +31,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final user = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Color.fromARGB(255, 95, 202, 193),
+        backgroundColor: Theme.of(context).bottomAppBarColor,
+        selectedItemColor: Theme.of(context).primaryColorLight,
+        unselectedItemColor: Theme.of(context).primaryColorDark,
         onTap: (index) => setState(() {
           if (index == 2 && user.isEmpty) {
             Navigator.push(
