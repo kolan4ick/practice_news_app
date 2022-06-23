@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practice_news_app/app/app.dart';
 import '../../../repositories/authentication_repository.dart';
+import '../../home/view/home_page.dart';
 import '../../sign_up/sign_up.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const SignUpPage());
+    return MaterialPageRoute(builder: (_) => SignUpPage());
   }
 
   @override
   Widget build(BuildContext context) {
+    if(context.select((AppBloc bloc) => bloc.state.status) == AppStatus.authenticated) {
+      return const HomePage();
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Реєстрація'),

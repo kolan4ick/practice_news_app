@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../app/bloc/app_bloc.dart';
 import '../../../repositories/authentication_repository.dart';
+import '../../home/view/home_page.dart';
 import '../cubit/login_cubit.dart';
 import 'login_form.dart';
 
@@ -11,6 +13,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(context.select((AppBloc bloc) => bloc.state.status) == AppStatus.authenticated) {
+      return const HomePage();
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Логін'),
